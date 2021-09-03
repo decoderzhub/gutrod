@@ -1,3 +1,10 @@
+# GUTROD
+
+In honor of those [who gave the ultimate sacrifice](https://www.armytimes.com/news/your-army/2020/02/09/pentagon-identifies-two-soldiers-killed-in-combat/).
+
+SFC Javier J. Gutierrez
+SFC Antonio R. Rodriguez
+
 # MySQL Example
 
 This is an example of using [MySQL](https://www.mysql.com/) in a Next.js project.
