@@ -7,7 +7,7 @@ require('dotenv').config({ path: envPath })
 
 const ServerlessClient = require('serverless-postgres')
 
-const db = ServerlessClient({
+const  = ServerlessClient({
   config: {
     host: process.env.DB_HOST,
     database: process.env.DB_DATABASE,
