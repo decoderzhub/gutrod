@@ -28,6 +28,14 @@ yarn create next-app --example with-mysql next-mysql-app
 
 Set up a MySQL server either locally or any cloud provider.
 
+Locally:
+
+1. Download [mysql for mac](https://dev.mysql.com/downloads/mysql/)
+1. Install
+1. Read more [about tooling if you want](https://medium.com/macoclock/mysql-on-mac-getting-started-cecb65b78e)
+1. Set up db schema
+1. Start making calls, etc.
+
 ### Step 2. Set up environment variables
 
 Copy the `env.local.example` file in this directory to `.env.local` (which will be ignored by Git):
