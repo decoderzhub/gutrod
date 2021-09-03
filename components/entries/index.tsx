@@ -1,6 +1,7 @@
 import Entry from './entry'
 
 function Entries({ entries }) {
+  console.log(entries)
   if (entries) {
     return (
       <div>
