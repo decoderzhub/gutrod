@@ -16,7 +16,7 @@ const handler: NextApiHandler = async (req, res) => {
     const results = await query(
       `
       UPDATE entries
-      SET title = ?, firstname = ?, lastname = ?, email= ?, phone = ?, amcontact = ?, content = ?, latlong = ?
+      SET title = ?, firstname = ?, lastname = ?, email= ?, phone = ?, amcontact = ?, content = ?
       WHERE id = ?
       `,
       [filter.clean(title), filter.clean(firstname), filter.clean(lastname), filter.clean(email), filter.clean(phone), filter.clean(amcontact), filter.clean(content), id]
