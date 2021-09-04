@@ -5,7 +5,7 @@ import { query } from '../../lib/db'
 const filter = new Filter()
 
 const handler: NextApiHandler = async (req, res) => {
-  const { id, title, firstname, lastname, email, phone, amcontact, content, latlong } = req.body
+  const { id, title, firstname, lastname, email, phone, amcontact, content} = req.body
   try {
     if (!id || !title || !content) {
       return res
@@ -19,7 +19,7 @@ const handler: NextApiHandler = async (req, res) => {
       SET title = ?, firstname = ?, lastname = ?, email= ?, phone = ?, amcontact = ?, content = ?, latlong = ?
       WHERE id = ?
       `,
-      [filter.clean(title), filter.clean(firstname), filter.clean(lastname), filter.clean(email), filter.clean(phone), filter.clean(amcontact), filter.clean(content), id, latlong]
+      [filter.clean(title), filter.clean(firstname), filter.clean(lastname), filter.clean(email), filter.clean(phone), filter.clean(amcontact), filter.clean(content), id]
     )
 
     return res.json(results)
