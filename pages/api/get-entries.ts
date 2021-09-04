@@ -6,7 +6,7 @@ const handler: NextApiHandler = async (_, res) => {
     const results = await query(`
       SELECT * FROM entries
       ORDER BY id DESC
-      LIMIT 10
+      LIMIT 1000
   `)
 
     return res.json(results)

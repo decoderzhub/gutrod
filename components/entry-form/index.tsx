@@ -5,6 +5,11 @@ import Button from '@/components/button'
 
 export default function EntryForm() {
   const [title, setTitle] = useState('')
+  const [firstname, setFirstName] = useState('')
+  const [lastname, setLastName] = useState('')
+  const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
+  const [amcontact, setAmcontact] = useState('')
   const [content, setContent] = useState('')
   const [submitting, setSubmitting] = useState(false)
 
@@ -19,6 +24,11 @@ export default function EntryForm() {
         },
         body: JSON.stringify({
           title,
+          firstname,
+          lastname,
+          email,
+          phone,
+          amcontact,
           content,
         }),
       })
@@ -45,6 +55,71 @@ export default function EntryForm() {
           name="title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+        />
+      </div>
+      <div className="my-4">
+        <label htmlFor="firstname">
+          <h3 className="font-bold">First Name</h3>
+        </label>
+        <input
+          id="firstname"
+          className="shadow border rounded w-full"
+          type="text"
+          name="firstname"
+          value={firstname}
+          onChange={(e) => setFirstName(e.target.value)}
+        />
+      </div>
+      <div className="my-4">
+        <label htmlFor="lastname">
+          <h3 className="font-bold">Last Name</h3>
+        </label>
+        <input
+          id="lastname"
+          className="shadow border rounded w-full"
+          type="text"
+          name="lastname"
+          value={lastname}
+          onChange={(e) => setLastName(e.target.value)}
+        />
+      </div>
+      <div className="my-4">
+        <label htmlFor="email">
+          <h3 className="font-bold">Email</h3>
+        </label>
+        <input
+          id="email"
+          className="shadow border rounded w-full"
+          type="text"
+          name="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+      </div>
+      <div className="my-4">
+        <label htmlFor="phone">
+          <h3 className="font-bold">Phone Number</h3>
+        </label>
+        <input
+          id="phone"
+          className="shadow border rounded w-full"
+          type="text"
+          name="phone"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+        />
+      </div>
+      <div className="my-4">
+        <label htmlFor="amcontact">
+          <h3 className="font-bold">American Contact Name</h3>
+        </label>
+        <input
+          id="amcontact"
+          className="shadow border rounded w-full"
+          type="text"
+          name="amcontact"
+          value={amcontact}
+          onChange={(e) => setAmcontact(e.target.value)}
         />
       </div>
       <div className="my-4">
