@@ -2,7 +2,7 @@ import Link from 'next/link'
 import Container from '@/components/container'
 import ButtonLink from '@/components/button-link'
 
-export default function Nav({ title = 'The Footbread Entries' }) {
+export default function Nav({ title = 'Footbread Entries' }) {
   return (
     <Container className="py-4">
       <nav>
