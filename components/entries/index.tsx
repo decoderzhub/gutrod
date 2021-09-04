@@ -1,7 +1,7 @@
 import Entry from './entry'
 
 function Entries({ entries }) {
-  entries = [{id:0, title: "Welcome to footbread", content: "click on add to add your information." }]
+  //entries = [{id:0, title: "Welcome to footbread", content: "click on add to add your information." }]
   console.log(entries)
   if (entries) {
     return (

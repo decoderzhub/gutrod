@@ -27,6 +27,7 @@ export default function EntryForm() {
       if (!res.ok) throw Error(json.message)
       Router.push('/')
     } catch (e) {
+      console.log(e)
       throw Error(e.message)
     }
   }
