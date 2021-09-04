@@ -117,9 +117,22 @@ export default function EntryForm() {
           id="email"
           className="shadow border rounded w-full"
           type="email"
-          name="firstname"
+          name="email"
           value={_email}
           onChange={(e) => setEmail(e.target.value)}
+        />
+      </div>
+      <div className="my-4">
+        <label htmlFor="phone">
+          <h3 className="font-bold">Phone</h3>
+        </label>
+        <input
+          id="phone"
+          className="shadow border rounded w-full"
+          type="text"
+          name="phone"
+          value={_phone}
+          onChange={(e) => setPhone(e.target.value)}
         />
       </div>
       <div className="my-4">
