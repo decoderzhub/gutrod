@@ -1,19 +1,23 @@
-import { useState, useEffect} from 'react'
+import { useState, useEffect, useRef} from 'react'
+import {Loader} from '@googlemaps/js-api-loader';
+
 import Router from 'next/router'
 
 import Button from '@/components/button'
 
-var xlatlong = ""
+var xlatlong
+var map_center
 
 export default function EntryForm() {
   
+  const googlemap = useRef(null);
   
   const getLocation = () => {
     if (navigator.geolocation) {
        navigator.geolocation.getCurrentPosition(showPosition);
     } else { 
       xlatlong = "Geolocation is not supported by this browser.";
-      setLatlong(xlatlong)
+      setLatlong(xlatlong.toString())
     }
   }
 
@@ -22,11 +26,40 @@ export default function EntryForm() {
     //x.innerHTML = "Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.>
     var lat = position.coords.latitude
     var long = position.coords.longitude
-    xlatlong = [lat, long].toString()
-    setLatlong(xlatlong)
+    map_center = {lat: lat, lng: long}
+    xlatlong = [lat, long]
+    setLatlong(xlatlong.toString())
     //setCookie("Latitude", [lat,long] , 365)
   }
   
+ 
+  useEffect(() => {
+    const loader = new Loader({
+      apiKey: process.env.NEXT_PUBLIC_API_KEY,
+      version: 'weekly',
+    });
+    let map;
+    //var  map_center = { lat: parseFloat(latlong[0]), lng: parseFloat(latlong[1])}
+    console.log(map_center)
+    loader.load().then(() => {
+      const google = window.google;
+      map = new google.maps.Map(googlemap.current, {
+        center: map_center,
+        zoom: 8,
+      });
+      const marker = new google.maps.Marker({
+        position: map_center,
+        map: map,
+      });
+    });
+  });
+
+  useEffect(() => {
+    getLocation()
+    return () => {
+    }
+  }, [])
+
 
   const [title, setTitle] = useState('')
   const [firstname, setFirstName] = useState('')
@@ -37,10 +70,6 @@ export default function EntryForm() {
   const [content, setContent] = useState('')
   const [latlong, setLatlong] = useState('')
   const [submitting, setSubmitting] = useState(false)
-
-  useEffect(() => {
-    getLocation()
-  }, [])
 
   async function submitHandler(e) {
     setSubmitting(true)
@@ -154,7 +183,7 @@ export default function EntryForm() {
       </div>
       <div className="my-4">
         <label htmlFor="content">
-          <h3 className="font-bold">Content</h3>
+          <h3 className="font-bold">Message</h3>
         </label>
         <textarea
           className="shadow border resize-none focus:shadow-outline w-full h-48"
@@ -176,6 +205,11 @@ export default function EntryForm() {
           readOnly
         />
       </div>
+
+      {/* <img src={"https://maps.googleapis.com/maps/api/staticmap?center="+latlong+"&zoom=14&size=400x300&sensor=false&key=AIzaSyA8HSmS16ym2PCkbiWfX7vo28bVrNI3RaE"}/> */}
+      
+      <div  style={{width: 400, height: 300}} id="map" ref={googlemap} />
+      
       <Button disabled={submitting} type="submit">
         {submitting ? 'Creating ...' : 'Create'}
       </Button>
