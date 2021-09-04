@@ -5,15 +5,15 @@ console.log({ envPath })
 
 require('dotenv').config({ path: envPath })
 
-const ServerlessClient = require('serverless-postgres')
+const mysql = require('serverless-mysql')
 
-const  = ServerlessClient({
+const db = mysql({
   config: {
-    host: process.env.DB_HOST,
-    database: process.env.DB_DATABASE,
-    user: process.env.DB_USERNAME,
-    password: process.env.DB_PASSWORD,
-    port: process.env.DB_PORT,
+    host: process.env.MYSQL_HOST,
+    database: process.env.MYSQL_DATABASE,
+    user: process.env.MYSQL_USERNAME,
+    password: process.env.MYSQL_PASSWORD,
+    port: process.env.MYSQL_PORT,
   },
 })
 
