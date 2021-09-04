@@ -1,9 +1,33 @@
-import { useState } from 'react'
+import { useState, useEffect} from 'react'
 import Router from 'next/router'
 
 import Button from '@/components/button'
 
+var xlatlong = ""
+
 export default function EntryForm() {
+  
+  
+  const getLocation = () => {
+    if (navigator.geolocation) {
+       navigator.geolocation.getCurrentPosition(showPosition);
+    } else { 
+      xlatlong = "Geolocation is not supported by this browser.";
+      setLatlong(xlatlong)
+    }
+  }
+
+  const showPosition = (position) => {
+    //var x = document.getElementById("location");
+    //x.innerHTML = "Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.>
+    var lat = position.coords.latitude
+    var long = position.coords.longitude
+    xlatlong = [lat, long].toString()
+    setLatlong(xlatlong)
+    //setCookie("Latitude", [lat,long] , 365)
+  }
+  
+
   const [title, setTitle] = useState('')
   const [firstname, setFirstName] = useState('')
   const [lastname, setLastName] = useState('')
@@ -11,7 +35,12 @@ export default function EntryForm() {
   const [phone, setPhone] = useState('')
   const [amcontact, setAmcontact] = useState('')
   const [content, setContent] = useState('')
+  const [latlong, setLatlong] = useState('')
   const [submitting, setSubmitting] = useState(false)
+
+  useEffect(() => {
+    getLocation()
+  }, [])
 
   async function submitHandler(e) {
     setSubmitting(true)
@@ -30,6 +59,7 @@ export default function EntryForm() {
           phone,
           amcontact,
           content,
+          latlong
         }),
       })
       setSubmitting(false)
@@ -132,6 +162,18 @@ export default function EntryForm() {
           name="content"
           value={content}
           onChange={(e) => setContent(e.target.value)}
+        />
+      </div>
+      <div className="my-4">
+        <label htmlFor="latlong">
+          <h3 className="font-bold">Location</h3>
+        </label>
+        <textarea
+          className="shadow border resize-none focus:shadow-outline w-full h-10"
+          id="latlong"
+          name="latlong"
+          value={latlong}
+          readOnly
         />
       </div>
       <Button disabled={submitting} type="submit">
