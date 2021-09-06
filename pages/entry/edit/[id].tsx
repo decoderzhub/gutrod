@@ -5,7 +5,7 @@ import EditEntryForm from '@/components/edit-entry-form'
 export default function EditEntryPage() {
   return (
     <>
-      <Nav title="test" />
+      <Nav title="edit" />
       <Container>
         <EditEntryForm />
       </Container>
