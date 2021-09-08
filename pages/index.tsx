@@ -6,7 +6,7 @@ import Entries from '@/components/entries'
 
 import { useEntries } from '@/lib/swr-hooks'
 
-export default function IndexPage() {
+export default function IndexPage({}) {
   const { entries, isLoading } = useEntries()
 
   if (isLoading) {

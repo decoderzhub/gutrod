@@ -4,6 +4,7 @@ import {Loader} from '@googlemaps/js-api-loader';
 import Router from 'next/router'
 
 import Button from '@/components/button'
+import Gmaps from '../gmaps';
 
 var xlatlong
 var map_center
@@ -32,27 +33,27 @@ export default function EntryForm() {
     //setCookie("Latitude", [lat,long] , 365)
   }
   
+  
  
-  useEffect(() => {
-    const loader = new Loader({
-      apiKey: process.env.NEXT_PUBLIC_API_KEY,
-      version: 'weekly',
-    });
-    let map;
-    //var  map_center = { lat: parseFloat(latlong[0]), lng: parseFloat(latlong[1])}
-    console.log(map_center)
-    loader.load().then(() => {
-      const google = window.google;
-      map = new google.maps.Map(googlemap.current, {
-        center: map_center,
-        zoom: 8,
-      });
-      const marker = new google.maps.Marker({
-        position: map_center,
-        map: map,
-      });
-    });
-  });
+  // useEffect(() => {
+  //   const loader = new Loader({
+  //     apiKey: process.env.NEXT_PUBLIC_API_KEY,
+  //     version: 'weekly',
+  //   });
+  //   let map;
+  //   //var  map_center = { lat: parseFloat(latlong[0]), lng: parseFloat(latlong[1])}
+  //   loader.load().then(() => {
+  //     const google = window.google;
+  //     map = new google.maps.Map(googlemap.current, {
+  //       center: map_center,
+  //       zoom: 8,
+  //     });
+  //     const marker = new google.maps.Marker({
+  //       position: map_center,
+  //       map: map,
+  //     });
+  //   });
+  // });
 
   useEffect(() => {
     getLocation()
@@ -68,7 +69,7 @@ export default function EntryForm() {
   const [phone, setPhone] = useState('')
   const [amcontact, setAmcontact] = useState('')
   const [content, setContent] = useState('')
-  const [latlong, setLatlong] = useState('')
+  const [latlong, setLatlong] = useState()
   const [submitting, setSubmitting] = useState(false)
 
   async function submitHandler(e) {
@@ -208,7 +209,7 @@ export default function EntryForm() {
 
       {/* <img src={"https://maps.googleapis.com/maps/api/staticmap?center="+latlong+"&zoom=14&size=400x300&sensor=false&key=AIzaSyA8HSmS16ym2PCkbiWfX7vo28bVrNI3RaE"}/> */}
       
-      <div  style={{width: 400, height: 300}} id="map" ref={googlemap} />
+      {latlong !== '' ? <Gmaps data={latlong}/> : <p>Loading Map...</p>}
       
       <Button disabled={submitting} type="submit">
         {submitting ? 'Creating ...' : 'Create'}
